@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Happy Birthday</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+
+    body{
+      overflow-x:hidden;
+      font-family: sans-serif;
+    }
+
+    .floating{
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float{
+      0%,100%{
+        transform: translateY(0);
+      }
+      50%{
+        transform: translateY(-15px);
+      }
+    }
+
+    .spinSlow{
+      animation: spin 15s linear infinite;
+    }
+
+    .pulseGlow{
+      animation: glow 2s infinite;
+    }
+
+    @keyframes glow{
+      0%{
+        box-shadow:0 0 10px #ff4fd8;
+      }
+      50%{
+        box-shadow:0 0 30px #ff4fd8;
+      }
+      100%{
+        box-shadow:0 0 10px #ff4fd8;
+      }
+    }
+
+    .confetti{
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top:-10px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall{
+      to{
+        transform: translateY(110vh) rotate(720deg);
+      }
+    }
+
+  </style>
+
+</head>
+
+<body class="bg-gradient-to-br from-pink-200 via-purple-200 to-yellow-100 min-h-screen relative">
+
+  <!-- floating emoji -->
+  <div class="absolute top-10 left-10 text-6xl floating"></div>
+  <div class="absolute top-20 right-10 text-6xl floating"></div>
+  <div class="absolute bottom-10 left-20 text-5xl floating"></div>
+
+  <div class="max-w-6xl mx-auto p-6">
+
+    <div class="bg-white/70 backdrop-blur-xl rounded-[20px] shadow-2xl overflow-hidden">
+
+      <!-- HERO -->
+      <div class="relative overflow-hidden bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400 text-white text-center py-20 px-6">
+
+        <div class="absolute inset-0 opacity-20 bg-white"></div>
+
+        <div class="relative z-10">
+
+          <h1 class="text-5xl md:text-6xl font-black mb-6 pulseGlow rounded-full inline-block px-6 py-3">
+            HAPPY BIRTHDAY PET
+          </h1>
+
+          <p class="text-xl md:text-2xl opacity-90">
+            Selamat ulang tahun untuk orang paling spesial, PRANKKKK
+          </p>
+
+          <button onclick="openLetter()"
+          class="mt-8 bg-white text-pink-500 font-bold px-8 py-4 rounded-full shadow-xl hover:scale-110 transition">
+            Open Secret Letter 
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- SECRET LETTER -->
+      <div id="letter"
+      class="hidden p-10 bg-pink-50 text-center">
+
+        <h2 class="text-4xl font-black text-pink-500 mb-5">
+          Secret Message 
+        </h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto">
+          Terima kasih sudah bertahan sejauh ini.
+          Semoga tahun ini membawa banyak kebahagiaan,
+          kesehatan, dan orang-orang baik di sekitarmu, amjay kata-kata hari ini
+        </p>
+
+      </div>
+
+      <!-- FOTO -->
+      <div class="p-8">
+
+        <h2 class="text-4xl font-black text-center mb-8">
+          Special Photo 
+        </h2>
+
+        <div class="flex justify-center">
+
+          <div class="relative group">
+
+            <img
+            src="foto.jpg"
+            class="w-[350px] md:w-[500px] rounded-[30px] shadow-2xl group-hover:scale-105 transition duration-500">
+
+            <div class="absolute inset-0 bg-black/20 rounded-[30px] opacity-0 group-hover:opacity-100 transition"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- COUNTDOWN -->
+      <div class="p-8">
+
+        <div class="bg-gradient-to-r from-pink-500 to-purple-500 rounded-[35px] text-white p-10 text-center shadow-2xl">
+
+          <h2 class="text-4xl font-black mb-6">
+            Birthday Countdown 
+          </h2>
+
+          <p id="count"
+          class="text-4xl font-black animate-pulse">
+            10
+          </p>
+
+        </div>
+
+      </div>
+
+<!-- TIUP LILIN -->
+<div class="p-8">
+
+  <div class="bg-white rounded-[35px] shadow-2xl p-10 text-center">
+
+    <h2 class="text-4xl font-black mb-2">
+      Blow The Candle 🕯️
+    </h2>
+
+    <p class="text-gray-600 mb-8">
+      Tekan tombol untuk meniup lilin ulang tahun
+    </p>
+
+    <div class="relative flex justify-center items-center-mt-24">
+
+      <!-- cake -->
+      <div class="w-64 h-44 bg-pink-300 rounded-t-[40px] relative shadow-xl mt-24">
+
+        <!-- icing -->
+        <div class="absolute top-0 left-0 w-full h-10 bg-pink-200 rounded-t-[40px]"></div>
+
+        <!-- candle -->
+        <div class="absolute -top-10 left-1/2 -translate-x-1/2">
+
+          <div class="w-6 h-20 bg-yellow-200 rounded-full relative">
+
+            <!-- flame -->
+            <div id="flame"
+            class="w-10 h-10 bg-orange-400 rounded-full absolute -top-8 left-1/2 -translate-x-1/2 animate-pulse shadow-[0_0_30px_orange]">
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <button onclick="blowCandle()"
+    class="mt-10 bg-pink-500 hover:bg-pink-600 text-white px-8 py-4 rounded-full text-xl font-bold shadow-xl hover:scale-105 transition">
+
+      Blow Candle 💨
+
+    </button>
+
+    <p id="candleText"
+    class="mt-6 text-2xl font-bold text-pink-500">
+    </p>
+
+  </div>
+
+</div>
+
+      <!-- GAME -->
+      <div class="p-8">
+
+        <div class="bg-yellow-50 rounded-[35px] p-10 shadow-xl">
+
+          <h2 class="text-4xl font-black text-center mb-3">
+            Birthday Mini Game 
+          </h2>
+
+          <p class="text-center text-gray-600 mb-8">
+            Cari hadiah yang benar 
+          </p>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+            <button onclick="wrongGift()"
+            class="gift bg-pink-400 hover:scale-105 transition text-white text-6xl p-6 rounded-3xl shadow-xl">
+              
+            </button>
+
+            <button onclick="wrongGift()"
+            class="gift bg-purple-400 hover:scale-105 transition text-white text-6xl p-6 rounded-3xl shadow-xl">
+              
+            </button>
+
+            <button onclick="correctGift()"
+            class="gift bg-yellow-400 hover:scale-105 transition text-white text-6xl p-6 rounded-3xl shadow-xl">
+              
+            </button>
+
+            <button onclick="wrongGift()"
+            class="gift bg-blue-400 hover:scale-105 transition text-white text-6xl p-6 rounded-3xl shadow-xl">
+              
+            </button>
+
+          </div>
+
+          <p id="gameText"
+          class="text-center mt-8 text-2xl font-bold text-pink-500">
+          </p>
+
+        </div>
+
+      </div>
+
+   <!-- VIDEO -->
+<div class="p-8">
+
+  <div class="bg-white rounded-[35px] shadow-2xl p-8 text-center">
+
+    <h2 class="text-4xl font-black mb-6">
+      Special Birthday Video 🎥
+    </h2>
+
+    <div class="overflow-hidden rounded-[30px] shadow-xl">
+
+      <video
+      controls
+      class="w-full rounded-[30px]">
+
+        <source src="video.mp4" type="video/mp4">
+
+      </video>
+
+    </div>
+
+  </div>
+
+</div>
+
+      <!-- FOOTER -->
+      <div class="text-center pb-8 text-gray-600 font-semibold">
+        Made with love for someone special
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // open letter
+    function openLetter(){
+      document.getElementById("letter")
+      .classList.toggle("hidden")
+    }
+
+    // countdown
+    let count = 10
+
+    setInterval(() => {
+
+      if(count > 0){
+
+        count--
+        document.getElementById("count")
+        .innerText = count
+
+      } else {
+
+        document.getElementById("count")
+        .innerText = " SURPRISE "
+
+        createConfetti()
+
+      }
+
+    },2000)
+
+    // confetti
+    function createConfetti(){
+
+      for(let i=0;i<25;i++){
+
+        const confetti = document.createElement("div")
+
+        confetti.classList.add("confetti")
+
+        confetti.style.left = Math.random()*100 + "vw"
+
+        confetti.style.background =
+        `hsl(${Math.random()*360},100%,50%)`
+
+        confetti.style.animationDuration =
+        (Math.random()*5+4)+"s"
+
+        document.body.appendChild(confetti)
+
+        setTimeout(()=>{
+          confetti.remove()
+        },5000)
+
+      }
+
+    }
+
+    // game
+    function correctGift(){
+
+      document.getElementById("gameText")
+      .innerText = " YEAY! Kamu menemukan hadiah spesial!"
+
+      createConfetti()
+
+    }
+
+    function wrongGift(){
+
+      document.getElementById("gameText")
+      .innerText = " Yah salah, coba lagi!"
+
+    }
+
+    // music
+    function playMusic(){
+
+      document.getElementById("music").play()
+
+    }
+
+function blowCandle(){
+
+  const flame = document.getElementById("flame")
+
+  flame.style.opacity = "0"
+
+  document.getElementById("candleText")
+  .innerText = "🎉 YEAAY! Lilinnya berhasil ditiup!"
+
+  createConfetti()
+
+}
+  </script>
+
+</body>
+</html>
